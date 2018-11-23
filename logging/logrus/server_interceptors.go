@@ -108,7 +108,7 @@ func levelLogf(entry *logrus.Entry, level logrus.Level, format string, args ...i
 func newLoggerForCall(ctx context.Context, entry *logrus.Entry, fullMethodString string, start time.Time) context.Context {
 	service := path.Dir(fullMethodString)[1:]
 	method := path.Base(fullMethodString)
-	callLog := entry.WithFields(
+	callLog := entry.WithField("ctx", ctx).WithFields(
 		logrus.Fields{
 			SystemField:       "grpc",
 			KindField:         "server",

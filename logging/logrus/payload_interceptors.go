@@ -4,13 +4,15 @@ import (
 	"bytes"
 	"fmt"
 
+	"github.com/grpc-ecosystem/go-grpc-middleware/logging"
+	"github.com/grpc-ecosystem/go-grpc-middleware/logging/logrus/ctxlogrus"
+	"github.com/grpc-ecosystem/go-grpc-middleware/tags/logrus"
 	"github.com/golang/protobuf/jsonpb"
 	"github.com/golang/protobuf/proto"
-	"github.com/grpc-ecosystem/go-grpc-middleware/logging"
-	"github.com/grpc-ecosystem/go-grpc-middleware/tags/logrus"
 	"github.com/sirupsen/logrus"
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/metadata"
 )
 
 var (
@@ -28,7 +30,9 @@ func PayloadUnaryServerInterceptor(entry *logrus.Entry, decider grpc_logging.Ser
 			return handler(ctx, req)
 		}
 		// Use the provided logrus.Entry for logging but use the fields from context.
-		logEntry := entry.WithFields(ctx_logrus.Extract(ctx).Data)
+		md, _ := metadata.FromIncomingContext(ctx)
+		ctx_logrus.AddFields(ctx, logrus.Fields{"grpc.request.metadata": md})
+		logEntry := entry.WithField("ctx", ctx).WithFields(ctx_logrus.Extract(ctx).Data)
 		logProtoMessageAsJson(logEntry, req, "grpc.request.content", "server request payload logged as grpc.request.content field")
 		resp, err := handler(ctx, req)
 		if err == nil {
@@ -48,7 +52,9 @@ func PayloadStreamServerInterceptor(entry *logrus.Entry, decider grpc_logging.Se
 			return handler(srv, stream)
 		}
 		// Use the provided logrus.Entry for logging but use the fields from context.
-		logEntry := entry.WithFields(Extract(stream.Context()).Data)
+		md, _ := metadata.FromIncomingContext(stream.Context())
+		ctxlogrus.AddFields(stream.Context(), logrus.Fields{"grpc.request.metadata": md})
+		logEntry := entry.WithField("ctx", stream.Context()).WithFields(Extract(stream.Context()).Data)
 		newStream := &loggingServerStream{ServerStream: stream, entry: logEntry}
 		return handler(srv, newStream)
 	}
@@ -60,7 +66,10 @@ func PayloadUnaryClientInterceptor(entry *logrus.Entry, decider grpc_logging.Cli
 		if !decider(ctx, method) {
 			return invoker(ctx, method, req, reply, cc, opts...)
 		}
-		logEntry := entry.WithFields(newClientLoggerFields(ctx, method))
+		md, _ := metadata.FromOutgoingContext(ctx)
+		fields := newClientLoggerFields(ctx, method)
+		fields["grpc.request.metadata"] = md
+		logEntry := entry.WithField("ctx", ctx).WithFields(fields)
 		logProtoMessageAsJson(logEntry, req, "grpc.request.content", "client request payload logged as grpc.request.content")
 		err := invoker(ctx, method, req, reply, cc, opts...)
 		if err == nil {
@@ -76,7 +85,10 @@ func PayloadStreamClientInterceptor(entry *logrus.Entry, decider grpc_logging.Cl
 		if !decider(ctx, method) {
 			return streamer(ctx, desc, cc, method, opts...)
 		}
-		logEntry := entry.WithFields(newClientLoggerFields(ctx, method))
+		md, _ := metadata.FromOutgoingContext(ctx)
+		fields := newClientLoggerFields(ctx, method)
+		fields["grpc.request.metadata"] = md
+		logEntry := entry.WithField("ctx", ctx).WithFields(fields)
 		clientStream, err := streamer(ctx, desc, cc, method, opts...)
 		newStream := &loggingClientStream{ClientStream: clientStream, entry: logEntry}
 		return newStream, err
