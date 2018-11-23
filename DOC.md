@@ -1,5 +1,5 @@
 # grpc_middleware
-`import "github.com/grpc-ecosystem/go-grpc-middleware"`
+`import "github.com/calin-ciobanu/go-grpc-middleware"`
 
 * [Overview](#pkg-overview)
 * [Imported Packages](#pkg-imports)

@@ -8,8 +8,8 @@ import (
 	"io"
 	"time"
 
-	"github.com/grpc-ecosystem/go-grpc-middleware/retry"
-	pb_testproto "github.com/grpc-ecosystem/go-grpc-middleware/testing/testproto"
+	"github.com/calin-ciobanu/go-grpc-middleware/retry"
+	pb_testproto "github.com/calin-ciobanu/go-grpc-middleware/testing/testproto"
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"

@@ -9,11 +9,11 @@ import (
 	"testing"
 	"time"
 
-	pb_testproto "github.com/grpc-ecosystem/go-grpc-middleware/testing/testproto"
+	pb_testproto "github.com/calin-ciobanu/go-grpc-middleware/testing/testproto"
 
-	grpc_middleware "github.com/grpc-ecosystem/go-grpc-middleware"
-	grpc_retry "github.com/grpc-ecosystem/go-grpc-middleware/retry"
-	"github.com/grpc-ecosystem/go-grpc-middleware/testing"
+	grpc_middleware "github.com/calin-ciobanu/go-grpc-middleware"
+	grpc_retry "github.com/calin-ciobanu/go-grpc-middleware/retry"
+	"github.com/calin-ciobanu/go-grpc-middleware/testing"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
@@ -132,7 +132,7 @@ func (s *RetrySuite) TestUnary_FailsOnNonRetriableError() {
 }
 
 func (s *RetrySuite) TestCallOptionsDontPanicWithoutInterceptor() {
-	// Fix for https://github.com/grpc-ecosystem/go-grpc-middleware/issues/37
+	// Fix for https://github.com/calin-ciobanu/go-grpc-middleware/issues/37
 	// If this code doesn't panic, that's good.
 	s.srv.resetFailingConfiguration(100, codes.DataLoss, noSleep) // doesn't matter all requests should fail
 	nonMiddlewareClient := s.NewClient()

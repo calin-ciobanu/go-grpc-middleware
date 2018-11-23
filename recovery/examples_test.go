@@ -4,8 +4,8 @@
 package grpc_recovery_test
 
 import (
-	"github.com/grpc-ecosystem/go-grpc-middleware"
-	"github.com/grpc-ecosystem/go-grpc-middleware/recovery"
+	"github.com/calin-ciobanu/go-grpc-middleware"
+	"github.com/calin-ciobanu/go-grpc-middleware/recovery"
 	"google.golang.org/grpc"
 )
 

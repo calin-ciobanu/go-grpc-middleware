@@ -3,11 +3,11 @@ package grpc_logrus_test
 import (
 	"time"
 
-	"github.com/grpc-ecosystem/go-grpc-middleware"
-	"github.com/grpc-ecosystem/go-grpc-middleware/logging/logrus"
-	"github.com/grpc-ecosystem/go-grpc-middleware/tags"
-	"github.com/grpc-ecosystem/go-grpc-middleware/tags/logrus"
-	pb_testproto "github.com/grpc-ecosystem/go-grpc-middleware/testing/testproto"
+	"github.com/calin-ciobanu/go-grpc-middleware"
+	"github.com/calin-ciobanu/go-grpc-middleware/logging/logrus"
+	"github.com/calin-ciobanu/go-grpc-middleware/tags"
+	"github.com/calin-ciobanu/go-grpc-middleware/tags/logrus"
+	pb_testproto "github.com/calin-ciobanu/go-grpc-middleware/testing/testproto"
 	"github.com/sirupsen/logrus"
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"

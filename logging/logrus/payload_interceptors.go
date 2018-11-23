@@ -4,9 +4,9 @@ import (
 	"bytes"
 	"fmt"
 
-	"github.com/grpc-ecosystem/go-grpc-middleware/logging"
-	"github.com/grpc-ecosystem/go-grpc-middleware/logging/logrus/ctxlogrus"
-	"github.com/grpc-ecosystem/go-grpc-middleware/tags/logrus"
+	"github.com/calin-ciobanu/go-grpc-middleware/logging"
+	"github.com/calin-ciobanu/go-grpc-middleware/logging/logrus/ctxlogrus"
+	"github.com/calin-ciobanu/go-grpc-middleware/tags/logrus"
 	"github.com/golang/protobuf/jsonpb"
 	"github.com/golang/protobuf/proto"
 	"github.com/sirupsen/logrus"

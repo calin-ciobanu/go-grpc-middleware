@@ -27,4 +27,4 @@ Types of changes:
 - grpc_validator
 - grpc_recovery
 
-[Unreleased]: https://github.com/grpc-ecosystem/go-grpc-middleware/compare/v1.0.0...HEAD 
+[Unreleased]: https://github.com/calin-ciobanu/go-grpc-middleware/compare/v1.0.0...HEAD 

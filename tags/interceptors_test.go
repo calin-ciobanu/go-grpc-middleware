@@ -7,9 +7,9 @@ import (
 
 	"time"
 
-	"github.com/grpc-ecosystem/go-grpc-middleware/tags"
-	"github.com/grpc-ecosystem/go-grpc-middleware/testing"
-	pb_testproto "github.com/grpc-ecosystem/go-grpc-middleware/testing/testproto"
+	"github.com/calin-ciobanu/go-grpc-middleware/tags"
+	"github.com/calin-ciobanu/go-grpc-middleware/testing"
+	pb_testproto "github.com/calin-ciobanu/go-grpc-middleware/testing/testproto"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"github.com/stretchr/testify/suite"

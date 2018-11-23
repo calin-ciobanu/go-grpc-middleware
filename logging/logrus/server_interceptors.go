@@ -6,9 +6,9 @@ import (
 	"path"
 	"time"
 
-	"github.com/grpc-ecosystem/go-grpc-middleware"
-	"github.com/grpc-ecosystem/go-grpc-middleware/logging/logrus/ctxlogrus"
-	"github.com/grpc-ecosystem/go-grpc-middleware/tags/logrus"
+	"github.com/calin-ciobanu/go-grpc-middleware"
+	"github.com/calin-ciobanu/go-grpc-middleware/logging/logrus/ctxlogrus"
+	"github.com/calin-ciobanu/go-grpc-middleware/tags/logrus"
 	"github.com/sirupsen/logrus"
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
